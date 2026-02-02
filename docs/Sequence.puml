@@ -1,0 +1,21 @@
+@startuml
+autonumber
+
+participant "Client" as C
+participant "Controller" as CTRL
+participant "Service" as S
+participant "Repository" as R
+database "Database" as DB
+
+== API Request Flow ==
+
+C -> CTRL: GET /employee/1
+CTRL -> S: getEmployee(id)
+S -> R: findById(id)
+R -> DB: SELECT
+DB --> R: result
+R --> S: Employee
+S --> CTRL: Employee
+CTRL --> C: JSON response
+
+@enduml
